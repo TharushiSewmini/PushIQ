@@ -62,7 +62,7 @@ func (re *RetryEngine) processRetries(ctx context.Context) {
 
 func (re *RetryEngine) retryNotification(ctx context.Context, notification model.Notification) {
 	attemptNumber := notification.AttemptCount + 1
-	
+
 	re.logger.WithFields(logrus.Fields{
 		"notification_id": notification.ID,
 		"attempt":         attemptNumber,
@@ -101,7 +101,7 @@ func (re *RetryEngine) retryNotification(ctx context.Context, notification model
 	if err != nil {
 		re.logger.WithError(err).Error("delivery engine error on retry")
 		_ = re.repo.RecordDeliveryAttempt(notification.ID, attemptNumber, "failed", ptrStr(err.Error()), nil)
-		
+
 		if attemptNumber < notification.MaxRetries {
 			re.scheduleNextRetry(&notification, attemptNumber)
 		} else {
@@ -113,7 +113,7 @@ func (re *RetryEngine) retryNotification(ctx context.Context, notification model
 	// Success
 	_ = re.repo.RecordDeliveryAttempt(notification.ID, attemptNumber, "sent", nil, response.RawResponse)
 	_ = re.repo.UpdateNotificationStatus(notification.ID, model.NotificationStatusSent, response.RawResponse)
-	
+
 	re.logger.WithFields(logrus.Fields{
 		"notification_id": notification.ID,
 		"attempt":         attemptNumber,

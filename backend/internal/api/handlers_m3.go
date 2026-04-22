@@ -27,9 +27,9 @@ type TokenExpirationRequest struct {
 }
 
 type DeviceHistoryResponse struct {
-	DeviceID string                `json:"device_id"`
+	DeviceID string                 `json:"device_id"`
 	Activity []model.DeviceActivity `json:"activity"`
-	Total    int                   `json:"total"`
+	Total    int                    `json:"total"`
 }
 
 // ListDevices returns all devices for an application with optional online filter

@@ -26,8 +26,8 @@ type fcmRequest struct {
 }
 
 type fcmResponse struct {
-	Success int    `json:"success"`
-	Failure int    `json:"failure"`
+	Success int   `json:"success"`
+	Failure int   `json:"failure"`
 	Results []any `json:"results"`
 }
 

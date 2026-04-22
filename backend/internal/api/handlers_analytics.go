@@ -174,7 +174,7 @@ func (s *Server) GetHourlyTrends(w http.ResponseWriter, r *http.Request) {
 // HealthCheck returns API health status
 func (s *Server) HealthCheck(w http.ResponseWriter, r *http.Request) {
 	response := map[string]interface{}{
-		"status": "healthy",
+		"status":  "healthy",
 		"service": "pushiq-api",
 		"version": "1.0.0",
 	}

@@ -5,18 +5,18 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/sirupsen/logrus"
 	"github.com/pushiq/pushiq-backend/internal/model"
 	"github.com/pushiq/pushiq-backend/internal/repository"
+	"github.com/sirupsen/logrus"
 )
 
 // LifecycleService handles device token lifecycle management
 type LifecycleService struct {
-	repo    *repository.Repository
-	logger  *logrus.Logger
-	ticker  *time.Ticker
-	stopCh  chan struct{}
-	doneCh  chan struct{}
+	repo   *repository.Repository
+	logger *logrus.Logger
+	ticker *time.Ticker
+	stopCh chan struct{}
+	doneCh chan struct{}
 }
 
 // NewLifecycleService creates a new device lifecycle service
