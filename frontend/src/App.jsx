@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import Notifications from './pages/Notifications'
 import Analytics from './pages/Analytics'
 import Settings from './pages/Settings'
+import { apiUrl } from './lib/api'
 
 export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -52,7 +53,7 @@ function LoginPage({ setApiKey }) {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/health', {
+      const response = await fetch(apiUrl('/health'), {
         headers: { 'X-Api-Key': key }
       })
       

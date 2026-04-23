@@ -14,6 +14,7 @@ type Config struct {
 	APNSKeyID    string
 	APNSTeamID   string
 	APNSTopic    string
+	Port         string
 }
 
 func Load() (*Config, error) {
@@ -26,6 +27,7 @@ func Load() (*Config, error) {
 		APNSKeyID:    os.Getenv("APNS_KEY_ID"),
 		APNSTeamID:   os.Getenv("APNS_TEAM_ID"),
 		APNSTopic:    os.Getenv("APNS_TOPIC"),
+		Port:         defaultEnv("PORT", "8080"),
 	}
 
 	if cfg.DatabaseURL == "" {
@@ -34,10 +36,10 @@ func Load() (*Config, error) {
 	if cfg.APIKey == "" {
 		return nil, fmt.Errorf("API_KEY is required")
 	}
-	if cfg.FCMServerKey == "" {
+	if cfg.FCMServerKey == "" && cfg.Environment != "development" {
 		return nil, fmt.Errorf("FCM_SERVER_KEY is required")
 	}
-	if cfg.APNSKeyPath == "" || cfg.APNSKeyID == "" || cfg.APNSTeamID == "" || cfg.APNSTopic == "" {
+	if (cfg.APNSKeyPath == "" || cfg.APNSKeyID == "" || cfg.APNSTeamID == "" || cfg.APNSTopic == "") && cfg.Environment != "development" {
 		return nil, fmt.Errorf("APNS_KEY_PATH, APNS_KEY_ID, APNS_TEAM_ID, and APNS_TOPIC are required")
 	}
 

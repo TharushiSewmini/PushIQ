@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -50,7 +51,7 @@ func main() {
 	lifecycleService.Start()
 
 	httpServer := &http.Server{
-		Addr:         ":8080",
+		Addr:         fmt.Sprintf(":%s", cfg.Port),
 		Handler:      server.Router(),
 		ReadTimeout:  15 * time.Second,
 		WriteTimeout: 15 * time.Second,

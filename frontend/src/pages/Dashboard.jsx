@@ -3,6 +3,7 @@ import MetricsCard from '../components/MetricsCard'
 import DeliveryChart from '../components/DeliveryChart'
 import FunnelChart from '../components/FunnelChart'
 import PlatformBreakdown from '../components/PlatformBreakdown'
+import { apiUrl } from '../lib/api'
 
 export default function Dashboard({ apiKey }) {
   const [dashboard, setDashboard] = useState(null)
@@ -16,7 +17,7 @@ export default function Dashboard({ apiKey }) {
   const fetchDashboard = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:8080/api/v1/analytics/dashboard', {
+      const response = await fetch(apiUrl('/api/v1/analytics/dashboard'), {
         headers: { 'X-Api-Key': apiKey }
       })
       
